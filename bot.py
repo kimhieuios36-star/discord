@@ -13,14 +13,17 @@ tree = app_commands.CommandTree(client)
 active_wars = {}
 
 curse_messages = [
-    "Đm {user} mày là thằng ngu lồn!", "{user} con chó đẻ, cút mẹ mày đi!", 
-    "Ê {user} lồn mẹ mày, não mày để đâu?", "{user} thằng phế vật, đồ óc chó!",
-    "Đéo não hả {user} con đĩ?", "{user} mày là con cặc, mẹ mày chết chưa?",
-    "Tao chửi mày đến chết {user} đồ ngu!", "{user} con đĩ mẹ, mày sống làm gì?",
+    "{user} nhat khang", 
+    "{user} là một con chó phế vật", 
+    "{user} anh khứa cái lồn mẹ mày", "{user} mẹ mày chỉ biết khóc",
+    "{user} cả sớm mày thay phiên nhau đụ lồn mẹ mày nát", 
+    "{user} mày là thằng con hoang mẹ mày không biết mày con của th lồn nào",
+    "{user} đồ ngu!", 
+    "{user} con đĩ mẹ, mày sống làm gì?",
     "{user} thằng bẩn thỉu, cút ra khỏi server!", "Mẹ kiếp {user}, mày là đồ vô dụng!",
     "{user} con lợn, não mày bằng phân!", "Đm {user} mày ngu như bò!",
     "{user} đồ đĩ, tao chửi mày 24/7!", "{user} mày là thằng loser!",
-    "Lồn {user} ơi, mày có não không?", "{user} con đĩ ngựa!",
+    "{user} ơi, mày có não không?", "{user} con đĩ ngựa!",
     "{user} mày chết đi cho rồi!", "Thằng {user} ngu vl!",
 ]
 
@@ -37,7 +40,7 @@ async def war(interaction: discord.Interaction, user: discord.Member):
         return
 
     active_wars[interaction.user.id] = True
-    await interaction.response.send_message(f"🚨 Đang WAR {user.mention}...", ephemeral=True)
+    await interaction.response.send_message(f"đang war {user.mention}...", ephemeral=True)
 
     try:
         while active_wars.get(interaction.user.id, False):
@@ -48,7 +51,7 @@ async def war(interaction: discord.Interaction, user: discord.Member):
                     await interaction.channel.send(msg.format(user=user.mention))
                 except:
                     pass
-                await asyncio.sleep(0.35)
+                await asyncio.sleep(0.10)
     except:
         pass
     finally:
@@ -58,7 +61,7 @@ async def war(interaction: discord.Interaction, user: discord.Member):
 async def stop(interaction: discord.Interaction):
     if interaction.user.id in active_wars:
         active_wars[interaction.user.id] = False
-        await interaction.response.send_message("✅ Đã dừng war!", ephemeral=True)
+        await interaction.response.send_message("dừng war!", ephemeral=True)
     else:
         await interaction.response.send_message("Chưa war ai cả!", ephemeral=True)
 
