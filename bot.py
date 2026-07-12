@@ -12,7 +12,7 @@ tree = app_commands.CommandTree(client)
 
 active_wars = {}
 
-# 🔥 Danh sách câu chửi (rất nhiều + thô hơn)
+# Danh sách câu chửi (rất nhiều)
 curse_messages = [
     "Đm {user} mày là thằng ngu lồn!",
     "{user} con chó đẻ, cút mẹ mày đi!",
@@ -34,6 +34,8 @@ curse_messages = [
     "Đéo phải người {user}, là con vật!",
     "{user} mày chết đi cho rồi!",
     "Thằng {user} ngu vl, tao chửi mày hoài!",
+    "{user} con đĩ, mày là đồ rác rưởi!",
+    "Tao đéo thích {user} mày đâu!",
 ]
 
 @client.event
@@ -60,4 +62,26 @@ async def war(interaction: discord.Interaction, user: discord.Member):
                     await interaction.channel.send(msg.format(user=user.mention))
                 except:
                     try:
-                        await user.send(msg.format(user
+                        await user.send(msg.format(user=user.mention))
+                    except:
+                        pass
+                await asyncio.sleep(0.35)  # Siêu nhanh
+    except:
+        pass
+    finally:
+        active_wars.pop(interaction.user.id, None)
+
+@tree.command(name="stop", description="Dừng war")
+async def stop(interaction: discord.Interaction):
+    if interaction.user.id in active_wars:
+        active_wars[interaction.user.id] = False
+        await interaction.response.send_message("✅ Đã dừng war!", ephemeral=True)
+    else:
+        await interaction.response.send_message("Bạn chưa war ai cả!", ephemeral=True)
+
+if __name__ == "__main__":
+    TOKEN = os.getenv("DISCORD_TOKEN")
+    if not TOKEN:
+        print("❌ Vui lòng set DISCORD_TOKEN!")
+    else:
+        client.run(TOKEN)
