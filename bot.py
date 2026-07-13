@@ -40,7 +40,7 @@ async def war(interaction: discord.Interaction, user: discord.Member):
         return
 
     active_wars[interaction.user.id] = True
-    await interaction.response.send_message(f"🚨 **WAR SIÊU TỐC 0.1s** với {user.mention} BẮT ĐẦU!!!", ephemeral=True)
+    await interaction.response.send_message(f"ĐANG WAR {user.mention} BẮT ĐẦU!!!", ephemeral=True)
 
     try:
         i = 0
@@ -51,7 +51,7 @@ async def war(interaction: discord.Interaction, user: discord.Member):
             except:
                 pass
             i += 1
-            await asyncio.sleep(0.1)   # Siêu nhanh 0.1 giây
+            await asyncio.sleep(0.5)   # Siêu nhanh 0.1 giây
     except:
         pass
     finally:
@@ -61,7 +61,7 @@ async def war(interaction: discord.Interaction, user: discord.Member):
 async def stop(interaction: discord.Interaction):
     if interaction.user.id in active_wars:
         active_wars[interaction.user.id] = False
-        await interaction.response.send_message("✅ Dừng war!", ephemeral=True)
+        await interaction.response.send_message("DỪNG WAR", ephemeral=True)
     else:
         await interaction.response.send_message("Chưa war ai!", ephemeral=True)
 
