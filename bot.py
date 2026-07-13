@@ -30,13 +30,13 @@ curse_messages = [
 @client.event
 async def on_ready():
     await tree.sync()
-    print(f'✅ Bot online - Tốc độ 0.1s!')
+    print(f'BOT ONLINE')
 
-@tree.command(name="war", description="Bắt đầu war")
+@tree.command(name="war", description="")
 @app_commands.describe(user="Người muốn chửi")
 async def war(interaction: discord.Interaction, user: discord.Member):
     if interaction.user.id in active_wars:
-        await interaction.response.send_message("Đang war rồi, /stop trước!", ephemeral=True)
+        await interaction.response.send_message("ĐANG WAR VUI LÒNG STOP", ephemeral=True)
         return
 
     active_wars[interaction.user.id] = True
@@ -51,13 +51,13 @@ async def war(interaction: discord.Interaction, user: discord.Member):
             except:
                 pass
             i += 1
-            await asyncio.sleep(0.5)   # Siêu nhanh 0.1 giây
+            await asyncio.sleep(0.10)   
     except:
         pass
     finally:
         active_wars.pop(interaction.user.id, None)
 
-@tree.command(name="stop", description="Dừng war")
+@tree.command(name="stop", description="")
 async def stop(interaction: discord.Interaction):
     if interaction.user.id in active_wars:
         active_wars[interaction.user.id] = False
