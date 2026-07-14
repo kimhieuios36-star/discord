@@ -51,7 +51,7 @@ async def war(interaction: discord.Interaction, user: discord.Member):
             except:
                 pass
             i += 1
-            await asyncio.sleep(0.5)   
+            await asyncio.sleep(0.4)   
     except:
         pass
     finally:
